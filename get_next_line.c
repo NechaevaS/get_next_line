@@ -6,7 +6,7 @@
 /*   By: snechaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 11:45:49 by snechaev          #+#    #+#             */
-/*   Updated: 2019/03/08 14:47:40 by snechaev         ###   ########.fr       */
+/*   Updated: 2019/03/12 13:00:00 by snechaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 int	get_next_line(const int fd, char **line)
 {
 	static char	buff[BUFF_SIZE + 1];
-	char	*tmp;
-	char	*tmp1;
-	int		nread;
-	char	*pn;
-	int		ntail;
+	char		*tmp;
+	char		*tmp1;
+	int			nread;
+	char		*pn;
+	int			ntail;
+	char		*tmp2;
 
 
 	if (!fd || !line)
 		return (-1);
-//	buff[BUFF_SIZE] = '\0';
+	buff[BUFF_SIZE] = '\0';
 	*line = ft_strdup("");
 	while ((nread = read(fd, buff, BUFF_SIZE)) > 0)
 	{
@@ -42,6 +43,12 @@ int	get_next_line(const int fd, char **line)
 			ntail = &(buff[BUFF_SIZE - 1]) - pn;
 			ft_memmove(buff, pn, ntail);
 			nread = read(fd, buff + ntail, BUFF_SIZE - ntail);
+			tmp2 = (char *)malloc(ntail + 1);
+			if (!tmp)
+				return	(-1);
+//			tmp2 = ft_strncpy(tmp2, buff, ntail);
+//			tmp[ntail + 1] = '\0';
+//			ft_memdel(&(c)buff);
 			return (1);
 		}
 		tmp = *line;
@@ -53,4 +60,5 @@ int	get_next_line(const int fd, char **line)
 		return (-1);
 	if (nread == 0)
 		return (0);
+	return (1);
 }
