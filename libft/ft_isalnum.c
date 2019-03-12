@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snechaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/06 14:15:36 by snechaev          #+#    #+#             */
-/*   Updated: 2019/03/06 16:04:04 by snechaev         ###   ########.fr       */
+/*   Created: 2019/02/12 13:09:52 by snechaev          #+#    #+#             */
+/*   Updated: 2019/02/12 13:15:55 by snechaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-
-# include "libft/libft.h"
-
-# define BUFF_SIZE 5
-# define MAX_FD 4000
-
-int	get_next_line(const int fd, char **line);
-
-#endif
-
-
-
+int	ft_isalnum(int c)
+{
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || (c >= 48 && c <= 57))
+		return (1);
+	return (0);
+}

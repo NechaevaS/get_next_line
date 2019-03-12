@@ -16,6 +16,7 @@ int	get_next_line(const int fd, char **line)
 {
 	static char	buff[BUFF_SIZE + 1];
 	char	*tmp;
+	char	*tmp1;
 	int		nread;
 	char	*pn;
 	int		ntail;
@@ -23,34 +24,33 @@ int	get_next_line(const int fd, char **line)
 
 	if (!fd || !line)
 		return (-1);
-	buff[BUFF_SIZE] = '\0';
-	nread  = read(fd, buff, BUFF_SIZE);
-	if (nread < 0)
-		return (-1);
-	line = NULL;
-	while (nread > 0)
+//	buff[BUFF_SIZE] = '\0';
+	*line = ft_strdup("");
+	while ((nread = read(fd, buff, BUFF_SIZE)) > 0)
 	{
 		pn = ft_strchr(buff, '\n');
 		if (pn != NULL)
 		{
 			tmp = (char *)malloc(pn - buff + 1);
 			if (!tmp)
-				return	(NULL);
-			tmp = ft_strcpy(tmp, buff);
-			*line = tmp;
+				return	(-1);
+			tmp = ft_strncpy(tmp, buff, pn - buff);
+			tmp[pn - buff] = '\0';
+			tmp1 = *line;
+			*line = ft_strjoin(*line, tmp);
+			free (tmp1);
+			ntail = &(buff[BUFF_SIZE - 1]) - pn;
+			ft_memmove(buff, pn, ntail);
+			nread = read(fd, buff + ntail, BUFF_SIZE - ntail);
 			return (1);
 		}
-		else
-		{
-			tmp = ft_strdup(buff);
-			*line = ft_strjoin(*line, tmp);
-		}
-		ntail = &(buff[BUFF_SIZE - 1]) - pn;
-		buff = ft_memmove(buff, pn, ntail);
-		nread = read(fd, buff + ntail, BUFF_SIZE - ntail);
-		free(tmp);
-		free(pn);
+		tmp = *line;
+		*line = ft_strjoin(tmp, buff);
+		free (tmp);
+
 	}
+	if (nread < 0)
+		return (-1);
 	if (nread == 0)
 		return (0);
 }

@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snechaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/06 14:15:36 by snechaev          #+#    #+#             */
-/*   Updated: 2019/03/06 16:04:04 by snechaev         ###   ########.fr       */
+/*   Created: 2019/02/26 11:38:24 by snechaev          #+#    #+#             */
+/*   Updated: 2019/02/28 15:27:52 by snechaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft/libft.h"
+void	ft_putendl_fd(char const *s, int fd)
+{
+	int i;
 
-# define BUFF_SIZE 5
-# define MAX_FD 4000
-
-int	get_next_line(const int fd, char **line);
-
-#endif
-
-
-
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+	write(fd, "\n", 1);
+}

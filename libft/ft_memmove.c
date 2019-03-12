@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snechaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/06 14:15:36 by snechaev          #+#    #+#             */
-/*   Updated: 2019/03/06 16:04:04 by snechaev         ###   ########.fr       */
+/*   Created: 2019/02/13 16:17:26 by snechaev          #+#    #+#             */
+/*   Updated: 2019/02/22 14:12:44 by snechaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft/libft.h"
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	char	*csrc;
+	char	*cdst;
 
-# define BUFF_SIZE 5
-# define MAX_FD 4000
-
-int	get_next_line(const int fd, char **line);
-
-#endif
-
-
-
+	csrc = (char *)src;
+	cdst = (char *)dst;
+	if (csrc == cdst || len == 0)
+		return (dst);
+	while (len > 0)
+	{
+		if (cdst < csrc)
+		{
+			*cdst = *csrc;
+			csrc++;
+			cdst++;
+			len--;
+		}
+		else
+		{
+			cdst[len - 1] = csrc[len - 1];
+			len--;
+		}
+	}
+	return (dst);
+}

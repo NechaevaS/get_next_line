@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snechaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/06 14:15:36 by snechaev          #+#    #+#             */
-/*   Updated: 2019/03/06 16:04:04 by snechaev         ###   ########.fr       */
+/*   Created: 2019/02/25 10:46:38 by snechaev          #+#    #+#             */
+/*   Updated: 2019/02/25 12:25:13 by snechaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
+#include <stdio.h>
 
-# include "libft/libft.h"
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*p;
+	int		i;
 
-# define BUFF_SIZE 5
-# define MAX_FD 4000
-
-int	get_next_line(const int fd, char **line);
-
-#endif
-
-
-
+	if (!s1 || !s2)
+		return (NULL);
+	p = (ft_strnew(ft_strlen(s1) + ft_strlen(s2)));
+	if (!p)
+		return (NULL);
+	i = 0;
+	while (*s1)
+	{
+		p[i] = *s1;
+		s1++;
+		i++;
+	}
+	while (*s2)
+	{
+		p[i] = *s2;
+		i++;
+		s2++;
+	}
+	p[i] = '\0';
+	return (p);
+}

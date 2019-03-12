@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snechaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/06 14:15:36 by snechaev          #+#    #+#             */
-/*   Updated: 2019/03/06 16:04:04 by snechaev         ###   ########.fr       */
+/*   Created: 2019/02/27 12:02:38 by snechaev          #+#    #+#             */
+/*   Updated: 2019/02/27 18:32:06 by snechaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft/libft.h"
+static char	*ft_fill(char *s, int n)
+{
+	if (n > 9)
+		s = ft_fill(s, n / 10);
+	*s = (n % 10) + '0';
+	return (s + 1);
+}
 
-# define BUFF_SIZE 5
-# define MAX_FD 4000
+char		*ft_itoa(int n)
+{
+	char	*str;
 
-int	get_next_line(const int fd, char **line);
-
-#endif
-
-
-
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	str = ft_strnew(11);
+	if (!str)
+		return (NULL);
+	if (n < 0)
+	{
+		str[0] = '-';
+		ft_fill(str + 1, -n);
+		return (str);
+	}
+	ft_fill(str, n);
+	return (str);
+}

@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snechaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/06 14:15:36 by snechaev          #+#    #+#             */
-/*   Updated: 2019/03/06 16:04:04 by snechaev         ###   ########.fr       */
+/*   Created: 2019/02/19 14:19:06 by snechaev          #+#    #+#             */
+/*   Updated: 2019/02/21 12:39:44 by snechaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft/libft.h"
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+{
+	unsigned int	i;
+	int				cp;
 
-# define BUFF_SIZE 5
-# define MAX_FD 4000
-
-int	get_next_line(const int fd, char **line);
-
-#endif
-
-
-
+	i = 0;
+	cp = 0;
+	while (*dst && i < dstsize)
+	{
+		dst++;
+		i++;
+	}
+	while (*src)
+	{
+		if (i < (dstsize - 1) && dstsize != 0)
+		{
+			*dst = *src;
+			dst++;
+			cp = 1;
+		}
+		src++;
+		i++;
+	}
+	if (cp == 1)
+		*dst = '\0';
+	return (i);
+}
