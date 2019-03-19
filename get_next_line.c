@@ -12,53 +12,57 @@
 
 #include "get_next_line.h"
 
-int	get_next_line(const int fd, char **line)
+int	find_end(char **line, char *dep)
 {
-	static char	buff[BUFF_SIZE + 1];
-	char		*tmp;
-	char		*tmp1;
-	int			nread;
-	char		*pn;
-	int			ntail;
-	char		*tmp2;
+	int	i;
+	char	*tmp;
+	
+	i = 0;
+	while (dep[i] != '\n' && dep)
+		i++;
+	if (dep[i] == '\n')
+	{
+		*line = ft_strsub(dep, 0, i);
+		tmp = ft_strdup(&dep[i + 1]);
+		ft_strdel(&dep);
+		dep = tmp;
+	}
+	else
+	{
+		*line = ft_strdup(dep);
+		ft_strdel(&dep);
+	}
+	return (1);
+}
 
-
-	if (!fd || !line)
-		return (-1);
-	buff[BUFF_SIZE] = '\0';
-	*line = ft_strdup("");
+int	file_read(const int fd, char **line, char *dep)
+{
+	char	buff[BUFF_SIZE + 1];
+	int	nread;
+	char	*tmp;
+	
 	while ((nread = read(fd, buff, BUFF_SIZE)) > 0)
 	{
-		pn = ft_strchr(buff, '\n');
-		if (pn != NULL)
-		{
-			tmp = (char *)malloc(pn - buff + 1);
-			if (!tmp)
-				return	(-1);
-			tmp = ft_strncpy(tmp, buff, pn - buff);
-			tmp[pn - buff] = '\0';
-			tmp1 = *line;
-			*line = ft_strjoin(*line, tmp);
-			free (tmp1);
-			ntail = &(buff[BUFF_SIZE - 1]) - pn;
-			ft_memmove(buff, pn, ntail);
-			nread = read(fd, buff + ntail, BUFF_SIZE - ntail);
-			tmp2 = (char *)malloc(ntail + 1);
-			if (!tmp)
-				return	(-1);
-//			tmp2 = ft_strncpy(tmp2, buff, ntail);
-//			tmp[ntail + 1] = '\0';
-//			ft_memdel(&(c)buff);
-			return (1);
-		}
-		tmp = *line;
-		*line = ft_strjoin(tmp, buff);
-		free (tmp);
-
+		buff[BUFF_SIZE] = '\0';
+		tmp = ft_strjoin(dep, buff);
+		ft_strdel(dep);
+		if (ft_strchr(buff, '\n'))
+			break;
 	}
 	if (nread < 0)
 		return (-1);
-	if (nread == 0)
+	else if(nread == 0 && dep[0] == '\0')
 		return (0);
-	return (1);
+	return (find_end(line, dep));
+}
+
+int	get_next_line(const int fd, char **line)
+{
+	static char	dep;
+
+	if (!fd || !line || fd > MAX_FD)
+		return (-1);
+	if (!dep)
+		dep = ft_strnew(1);
+	return (file_read(fd, line, dep));
 }
