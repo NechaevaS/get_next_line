@@ -6,7 +6,7 @@
 /*   By: snechaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:37:55 by snechaev          #+#    #+#             */
-/*   Updated: 2019/03/01 12:53:11 by snechaev         ###   ########.fr       */
+/*   Updated: 2019/03/06 16:43:37 by snechaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-size_t					ft_strlen(const char *str);
+size_t				ft_strlen(const char *str);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strstr(const char *str, const char *to_find);
@@ -85,8 +85,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_iswsps(int c);
 int					ft_skipws(char *str);
 int					ft_cnt_words(char const *s, char c);
-char				*ft_find(char *str,int (*f)(int n));
-char				*ft_skip(char *str,int (*f)(int n));
-void				ft_print_mem(unsigned char *str, size_t size);
+char				*ft_find(char *str, int (*f)(int n));
+char				*ft_skip(char *str, int (*f)(int n));
 
 #endif

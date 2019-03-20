@@ -6,24 +6,24 @@
 /*   By: snechaev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 12:56:28 by snechaev          #+#    #+#             */
-/*   Updated: 2019/02/26 14:27:35 by snechaev         ###   ########.fr       */
+/*   Updated: 2019/03/05 14:18:21 by snechaev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_cnt_words(char const *s, char c)
+int	ft_cnt_words(char const *s, char c)
 {
-    int cnt;
-    int i;
+	int cnt;
+	int i;
 
-    i = 0;
-    cnt = 0;
-    while (s[i] != '\0')
-    {
-        if (s[i] != c && (s[i-1] == c || i == 0))
-            cnt++;
-        i++;
-    }
-    return (cnt);
+	i = 0;
+	cnt = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] != c && (s[i - 1] == c || i == 0))
+			cnt++;
+		i++;
+	}
+	return (cnt);
 }

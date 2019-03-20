@@ -6,7 +6,7 @@
 #    By: snechaev <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/20 11:01:28 by snechaev          #+#    #+#              #
-#    Updated: 2019/03/01 16:26:14 by snechaev         ###   ########.fr        #
+#    Updated: 2019/03/06 16:43:49 by snechaev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,6 @@ OBJS = ft_memset.o\
 		ft_cnt_words.o\
 		ft_find.o\
 		ft_skip.o\
-		ft_print_mem.o\
 
 CFLAGS = -Wall -Wextra -Werror
 
